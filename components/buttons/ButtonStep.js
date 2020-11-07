@@ -11,9 +11,9 @@ const ButtonStep = ({ onPress, inProgress = false, disabled = false }) => {
       onPress={onPress} style={[styles.container, disabled ? styles.disabledButton : null]}
     >
       {inProgress ? (
-        <ActivityIndicator size="small" color={Colors.WHITE} />
+        <ActivityIndicator size="small" color={Colors.BLACK} />
       ) : (
-        <Ionicons name={'md-arrow-forward'} size={24} color={Colors.WHITE} />
+        <Ionicons name={'md-arrow-forward'} size={24} color={Colors.BLACK} />
       )}
     </TouchableOpacity>
   )
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   disabledButton: {
-    backgroundColor: Colors.GRAY_100
+    backgroundColor: Colors.GRAY_500
   }
 })
 

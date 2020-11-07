@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation, route }) => {
             onChangeText={text => setEmail(text)}
             placeholder={$t('Auth.email')}
             placeholderTextColor={Colors.GRAY}
-            color={Platform.OS === 'ios' ? Colors.BLACK : null}
+            color={Platform.OS === 'ios' ? Colors.WHITE : null}
             autoCapitalize={'none'}
             onSubmitEditing={handleButtonStepPressed}
             autoFocus={true}
@@ -83,7 +83,7 @@ const LoginScreen = ({ navigation, route }) => {
               onChangeText={text => setPassword(text)}
               placeholder={$t('Auth.password')}
               placeholderTextColor={Colors.GRAY}
-              color={Platform.OS === 'ios' ? Colors.BLACK : null}
+              color={Platform.OS === 'ios' ? Colors.WHITE : null}
               onSubmitEditing={handleButtonStepPressed}
               autoFocus={true}
             />
@@ -121,14 +121,14 @@ const LoginScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.WHITE,
+    backgroundColor: Colors.BACKGROUND,
     paddingHorizontal: 20,
     paddingTop: 50
   },
   input: {
     width: '100%',
     height: 50,
-    backgroundColor: Colors.WHITE_200,
+    backgroundColor: Colors.BLACK_100,
     borderRadius: 20,
     paddingLeft: 10,
     marginTop: 20,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   inputPassword: {
     width: '85%',
     height: 50,
-    backgroundColor: Colors.WHITE_200,
+    backgroundColor: Colors.BLACK_100,
     borderRadius: 20,
     paddingLeft: 10,
     fontSize: 18

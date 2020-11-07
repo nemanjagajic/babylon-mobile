@@ -28,6 +28,7 @@ const AuthStack = () => (
           shadowColor: 'transparent',
           elevation: 0
         },
+        headerTintColor: Colors.WHITE,
         headerLeft: () => (
           <TouchableOpacity
             style={{ marginLeft: 15 }}
@@ -37,7 +38,7 @@ const AuthStack = () => (
                 : navigation.setParams({ step: LOGIN_EMAIL })
             }}
           >
-            <Ionicons name={'md-arrow-back'} size={24} />
+            <Ionicons name={'md-arrow-back'} size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         )
       })}
@@ -52,6 +53,7 @@ const AuthStack = () => (
           shadowColor: 'transparent',
           elevation: 0
         },
+        headerTintColor: Colors.WHITE,
         headerLeft: () => (
           <TouchableOpacity
             style={{ marginLeft: 15 }}
@@ -66,7 +68,7 @@ const AuthStack = () => (
               }
             }}
           >
-            <Ionicons name={'md-arrow-back'} size={24} />
+            <Ionicons name={'md-arrow-back'} size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         )
       })}

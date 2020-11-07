@@ -1,12 +1,20 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Colors from '../constants/Colors'
 import $t from '../i18n'
+import babylonLogo from '../assets/babylon-logo.jpg'
+import googleLogo from '../assets/google-logo.png'
 
 const AuthScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.upperContent} />
+      <View style={styles.upperContent}>
+        <Image source={babylonLogo} style={styles.icon} />
+        <Text>
+          <Text style={styles.header}>Babylon </Text>
+          <Text style={styles.description}>Delivery</Text>
+        </Text>
+      </View>
       <View style={styles.authContent}>
         <View style={styles.authButtonsWrapper}>
           <TouchableOpacity
@@ -22,6 +30,13 @@ const AuthScreen = ({ navigation }) => {
             <Text style={styles.signupText}>{$t('Auth.signUp')}</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={styles.googleLoginButton}
+        >
+          <Image style={styles.googleLogo} source={googleLogo} />
+          <Text style={styles.googleText}>{$t('Auth.loginWithGoogle')}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -33,13 +48,15 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   upperContent: {
-    flex: 3,
-    backgroundColor: Colors.MAIN
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.BLACK_TRUE
   },
   authContent: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-    paddingHorizontal: 20
+    height: 220,
+    backgroundColor: Colors.BLACK_TRUE,
+    paddingHorizontal: 20,
   },
   authButtonsWrapper: {
     display: 'flex',
@@ -55,41 +72,58 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: Colors.MAIN
   },
   loginButton: {
-    backgroundColor: Colors.WHITE,
-    borderWidth: 2,
+    backgroundColor: Colors.BLACK,
+    borderWidth: 1,
     borderColor: Colors.MAIN
   },
   loginText: {
-    fontSize: 20,
+    fontSize: 18,
     color: Colors.MAIN,
     fontWeight: '500'
   },
   signupText: {
-    fontSize: 20,
-    color: Colors.WHITE,
+    fontSize: 18,
+    color: Colors.BLACK,
     fontWeight: '500'
   },
+  icon: {
+    width: 200,
+    height: 200,
+    borderRadius: 100
+  },
+  header: {
+    color: Colors.MAIN,
+    fontSize: 32,
+    letterSpacing: 3
+  },
+  description: {
+    color: Colors.WHITE,
+    fontSize: 32,
+    paddingHorizontal: 20,
+    textAlign: 'center'
+  },
   googleLoginButton: {
-    backgroundColor: Colors.WHITE_200,
-    marginTop: 20,
+    backgroundColor: Colors.BLACK,
+    marginTop: 30,
     height: 50,
     borderRadius: 20,
     display: 'flex',
     flexDirection: 'row',
     paddingLeft: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   googleLogo: {
-    width: 35,
-    height: 35
+    width: 25,
+    height: 25,
+    marginLeft: 5
   },
   googleText: {
-    fontSize: 18,
-    color: Colors.GRAY_400,
+    fontSize: 16,
+    color: Colors.WHITE,
     flex: 1,
     textAlign: 'center',
     marginLeft: -40,
