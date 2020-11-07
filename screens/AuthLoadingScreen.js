@@ -5,6 +5,7 @@ import Center from '../components/Center'
 import AuthScreen from './AuthScreen'
 import HomeScreen from './HomeScreen'
 import { AuthContext } from '../providers/AuthProvider'
+import AuthStack from '../navigation/AuthStack'
 
 const AuthLoadingScreen = () => {
   const [isLoadingUser, setIsLoadingUser] = useState(true)
@@ -36,7 +37,7 @@ const AuthLoadingScreen = () => {
       {user ? (
         <HomeScreen />
       ) : (
-        <AuthScreen />
+        <AuthStack />
       )}
     </NavigationContainer>
   )
