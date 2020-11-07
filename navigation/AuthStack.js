@@ -5,7 +5,7 @@ import AuthScreen from '../screens/AuthScreen'
 import LoginScreen from '../screens/auth/LoginScreen'
 import SignUpScreen from '../screens/auth/SignUpScreen'
 import Colors from '../constants/Colors'
-import { LOGIN_EMAIL } from '../constants/Auth'
+import {LOGIN_EMAIL, REGISTER_EMAIL, REGISTER_USER_DATA} from '../constants/Auth'
 import { Ionicons } from '@expo/vector-icons';
 import $t from '../i18n'
 
@@ -45,6 +45,31 @@ const AuthStack = () => (
     <Stack.Screen
       name={'SignUpScreen'}
       component={SignUpScreen}
+      options={({ navigation, route }) => ({
+        title: $t('Auth.signUp'),
+        headerStyle: {
+          backgroundColor: Colors.BACKGROUND,
+          shadowColor: 'transparent',
+          elevation: 0
+        },
+        headerLeft: () => (
+          <TouchableOpacity
+            style={{ marginLeft: 15 }}
+            onPress={() => {
+              const step = route.params?.step
+              if (step === REGISTER_EMAIL) {
+                navigation.goBack()
+              } else if (step === REGISTER_USER_DATA) {
+                navigation.setParams({ step: REGISTER_EMAIL })
+              } else {
+                navigation.setParams({ step: REGISTER_USER_DATA })
+              }
+            }}
+          >
+            <Ionicons name={'md-arrow-back'} size={24} />
+          </TouchableOpacity>
+        )
+      })}
     />
   </Stack.Navigator>
 )

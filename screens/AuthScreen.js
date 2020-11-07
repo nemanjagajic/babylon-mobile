@@ -1,8 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { useMutation } from 'react-query'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from 'react-native'
-import authService from '../services/api/AuthService'
-import { AuthContext } from '../providers/AuthProvider'
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Colors from '../constants/Colors'
 import $t from '../i18n'
 
