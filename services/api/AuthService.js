@@ -3,8 +3,8 @@ import { AsyncStorage } from 'react-native'
 
 
 const API_ENDPOINTS = {
-  LOGIN: '/auth/login',
-  REGISTER: '/auth/register'
+  LOGIN: '/login/',
+  REGISTER: '/users/'
 }
 
 class AuthService extends ApiService {
@@ -24,7 +24,7 @@ class AuthService extends ApiService {
     this.api.removeHeaders(['Authorization'])
   }
 
-  logIn = ({email, password}) => this.apiClient.post(API_ENDPOINTS.LOGIN, { email, password })
-  register = ({email, password}) => this.apiClient.post(API_ENDPOINTS.REGISTER, { email, password })
+  logIn = ({ email, password }) => this.apiClient.post(API_ENDPOINTS.LOGIN, { email, password, username: email })
+  register = ({email, password }) => this.apiClient.post(API_ENDPOINTS.REGISTER, { email, password, username: email })
 }
 export default new AuthService()
