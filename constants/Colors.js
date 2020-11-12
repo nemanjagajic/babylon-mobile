@@ -15,6 +15,7 @@ export default {
   BLACK: '#1a1a1a',
   BLACK_TRUE: '#000000',
   BLACK_100: '#333333',
+  BLACK_200: '#1f1f1f',
   ACCENT: '#03DAC5',
   GREEN_100: '#c9e8e6',
   RED: '#ff0000',

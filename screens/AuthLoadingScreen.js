@@ -2,10 +2,10 @@ import React, {useContext, useEffect, useState} from 'react'
 import {ActivityIndicator, AsyncStorage} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import Center from '../components/Center'
-import AuthScreen from './AuthScreen'
-import HomeScreen from './HomeScreen'
 import { AuthContext } from '../providers/AuthProvider'
 import AuthStack from '../navigation/AuthStack'
+import Drawer from '../navigation/Drawer'
+import Colors from '../constants/Colors'
 
 const AuthLoadingScreen = () => {
   const [isLoadingUser, setIsLoadingUser] = useState(true)
@@ -28,14 +28,14 @@ const AuthLoadingScreen = () => {
 
   if (isLoadingUser) return (
     <Center>
-      <ActivityIndicator size={'large'} />
+      <ActivityIndicator size={'large'} color={Colors.MAIN} />
     </Center>
   )
 
   return (
     <NavigationContainer>
       {user ? (
-        <HomeScreen />
+        <Drawer />
       ) : (
         <AuthStack />
       )}

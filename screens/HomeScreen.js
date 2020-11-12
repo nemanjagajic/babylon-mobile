@@ -1,24 +1,27 @@
-import React, { useContext } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
-import {AuthContext} from '../providers/AuthProvider'
+import React from 'react'
+import { useQuery } from 'react-query'
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native'
+import Colors from '../constants/Colors'
+import MealsService from '../services/api/MealsService'
+import Center from '../components/Center'
 
 const HomeScreen = () => {
-  const { setUser } = useContext(AuthContext)
+  const { data: meals, isLoading } = useQuery('meals', async () => {
+    const { data } = await MealsService.getMeals()
+    return data?.results
+  })
 
-  const logOut = () => {
-    AsyncStorage.removeItem('user')
-    setUser(null)
-  }
+  console.log({ meals })
+
+  if (isLoading) return (
+    <Center>
+      <ActivityIndicator size={'large'} color={Colors.MAIN} />
+    </Center>
+  )
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home Screen</Text>
-      <TouchableOpacity
-        onPress={logOut}
-        style={styles.logoutButton}
-      >
-        <Text>Log out</Text>
-      </TouchableOpacity>
     </View>
   )
 }
@@ -28,7 +31,8 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.BLACK
   },
   title: {
     fontSize: 28,

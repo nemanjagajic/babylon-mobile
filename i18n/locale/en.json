@@ -11,5 +11,8 @@
     "enterFullName": "Enter first name and last name:",
     "firstName": "First name",
     "lastName": "Last name"
+  },
+  "Food": {
+    "title": "Food"
   }
 }
