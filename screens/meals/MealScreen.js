@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet, TextInput, Platform, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Image, StyleSheet, TextInput, Platform, TouchableOpacity, Keyboard } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import $t from '../../i18n'
@@ -8,16 +8,37 @@ const MealScreen = ({ route: { params: { selectedFood: { picture, name, descript
   const [ showDefault, setShowDefault ] = useState(false)
   const [ comment, setComment ] = useState('')
   const [ count, setCount ] = useState(1)
+  const [ isKeyboardVisible, setIsKeyboardVisible ] = useState(false)
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+      setIsKeyboardVisible(true)
+    })
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setIsKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener && keyboardDidShowListener.remove()
+    }
+  })
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: picture }}
-        style={styles.image}
-        onLoadStart={() => setShowDefault(true)}
-        onLoad={() => setShowDefault(false)}
-      />
-      {showDefault && (
+      {!isKeyboardVisible && (
+        <Image
+          source={{ uri: picture }}
+          style={styles.image}
+          onLoadStart={() => setShowDefault(true)}
+          onLoad={() => setShowDefault(false)}
+        />
+      )}
+      {showDefault && !isKeyboardVisible && (
         <View style={[styles.image, styles.imagePlaceholder]}/>
       )}
       <Text style={styles.title}>{name}</Text>

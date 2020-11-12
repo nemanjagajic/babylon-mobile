@@ -5,7 +5,6 @@ import MealScreen from '../screens/meals/MealScreen'
 import $t from '../i18n'
 import Colors from '../constants/Colors'
 import {TouchableOpacity} from 'react-native'
-import {LOGIN_EMAIL} from '../constants/Auth'
 import {Ionicons} from '@expo/vector-icons'
 
 const Stack = createStackNavigator();
