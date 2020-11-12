@@ -33,7 +33,6 @@ const HomeStack = ({ navigation, route }) => (
         )
       }}
     />
-    {console.log(route)}
     <Stack.Screen
       name={'MealScreen'}
       component={MealScreen}
