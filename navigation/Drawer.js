@@ -1,16 +1,17 @@
 import React from 'react'
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../screens/HomeScreen'
 import Colors from '../constants/Colors'
 import $t from '../i18n'
 import Logout from '../screens/auth/Logout'
+import HomeStack from './HomeStack'
 
 const Drawer = createDrawerNavigator();
 
 export default () => {
   return (
       <Drawer.Navigator
-        initialRouteName={'HomeScreen'}
+        initialRouteName={'HomeStack'}
         drawerContentOptions={{
           activeTintColor: Colors.MAIN,
           activeBackgroundColor: Colors.BLACK,
@@ -18,34 +19,19 @@ export default () => {
           labelStyle:{
             marginLeft: 5
           },
-          backgroundColor: Colors.BLACK_200
+          backgroundColor: Colors.BLACK_200,
+        }}
+        screenOptions={{
+          headerShown: false,
         }}
       >
         <Drawer.Screen
-          name={'HomeScreen'}
-          component={HomeScreen}
-          options={{
-            title: $t('Food.title'),
-            headerStyle: {
-              backgroundColor: Colors.BACKGROUND,
-              shadowColor: 'transparent',
-              elevation: 0
-            },
-            headerTintColor: Colors.MAIN
-          }}
+          name={'HomeStack'}
+          component={HomeStack}
         />
         <Drawer.Screen
           name={'Logout'}
           component={Logout}
-          options={{
-            title: 'Logout',
-            headerStyle: {
-              backgroundColor: Colors.BACKGROUND,
-              shadowColor: 'transparent',
-              elevation: 0
-            },
-            headerTintColor: Colors.MAIN
-          }}
         />
       </Drawer.Navigator>
   );

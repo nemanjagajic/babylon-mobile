@@ -1,17 +1,16 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image } from 'react-native'
 import Colors from '../constants/Colors'
 import MealsService from '../services/api/MealsService'
 import Center from '../components/Center'
+import MealItem from '../components/meals/MealItem'
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const { data: meals, isLoading } = useQuery('meals', async () => {
     const { data } = await MealsService.getMeals()
     return data?.results
   })
-
-  console.log({ meals })
 
   if (isLoading) return (
     <Center>
@@ -21,7 +20,12 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
+      <FlatList
+        style={styles.listContainer}
+        data={meals}
+        renderItem={({ item }) => <MealItem {...item} navigation={navigation} />}
+        keyExtractor={item => item?.id?.toString()}
+      />
     </View>
   )
 }
@@ -32,7 +36,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.BLACK
+    backgroundColor: Colors.BLACK,
+    width: '100%'
   },
   title: {
     fontSize: 28,
@@ -40,6 +45,11 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     padding: 10
+  },
+  listContainer: {
+    width: '100%',
+    flex: 1,
+    paddingHorizontal: 15
   }
 })
 

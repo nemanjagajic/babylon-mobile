@@ -10,9 +10,13 @@
     "enterPassword": "Enter your password:",
     "enterFullName": "Enter first name and last name:",
     "firstName": "First name",
-    "lastName": "Last name"
+    "lastName": "Last name",
+    "logOut": "Log out"
   },
   "Food": {
-    "title": "Food"
+    "title": "Food",
+    "optionalComment": "Optional comment",
+    "chooseAdditions": "Choose additions",
+    "addToCart": "Add to card"
   }
 }
