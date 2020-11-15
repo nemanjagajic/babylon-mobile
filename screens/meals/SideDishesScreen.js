@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import Colors from '../../constants/Colors'
+import $t from '../../i18n'
 
 const SideDishesScreen = ({ navigation, route: { params: { sideDishes, selectedSideDishes: initialSideDishes = [] } } }) => {
   const [ selectedSideDishes, setSelectedSideDishes ] = useState(initialSideDishes)
@@ -53,7 +54,7 @@ const SideDishesScreen = ({ navigation, route: { params: { sideDishes, selectedS
           onPress={applySideDishes}
           disabled={!isChangeMade}
         >
-          <Text style={styles.applyText}>Apply</Text>
+          <Text style={styles.applyText}>{$t('Food.apply')}</Text>
         </TouchableOpacity>
       </View>
     </View>
