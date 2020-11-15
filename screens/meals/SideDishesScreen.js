@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 20
+    paddingBottom: 20,
+    zIndex: 1
   },
   applyButton: {
     height: 50,
