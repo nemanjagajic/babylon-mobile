@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import Colors from '../../constants/Colors'
 
-const MealItem = ({ picture, name, description, price, navigation }) => {
+const BOTTOM_WITH_BUTTON = 120;
+const BOTTOM_NO_BUTTON = 50;
+
+const MealItem = ({ picture, name, description, price, navigation, isLast, isButtonVisible }) => {
   const [ showDefault, setShowDefault ] = useState(false)
 
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, { marginBottom: isLast ? isButtonVisible ? BOTTOM_WITH_BUTTON : BOTTOM_NO_BUTTON : 0 } ]}
       onPress={() => {
         navigation.navigate('MealScreen', { selectedFood: { picture, name, description, price } })
       }}

@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useQuery } from 'react-query'
 import { View, Text, Image, StyleSheet, TextInput, Platform, TouchableOpacity, Keyboard } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import $t from '../../i18n'
 import MealsService from '../../services/api/MealsService'
+import {MealsContext} from '../../providers/MealsProvider'
 
 const MealScreen = ({
   navigation,
-  route: { params: { selectedFood: { picture, name, description, price }, selectedSideDishes = [] } }
+  route: { params: { selectedFood: { id, picture, name, description, price }, selectedSideDishes = [] } }
 }) => {
   const [ showDefault, setShowDefault ] = useState(false)
   const [ comment, setComment ] = useState('')
@@ -19,6 +20,8 @@ const MealScreen = ({
     const { data } = await MealsService.getSideDishes()
     return data?.results
   })
+
+  const { order, setOrder } = useContext(MealsContext)
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -43,6 +46,15 @@ const MealScreen = ({
       sideDishes,
       selectedSideDishes
     })
+  }
+
+  const handleSetOrder = () => {
+    setOrder([...order, {
+      meal: { id, picture, name, description, price },
+      side_dishes: selectedSideDishes,
+      count
+    }])
+    navigation.navigate('HomeScreen')
   }
 
   return (
@@ -73,9 +85,9 @@ const MealScreen = ({
           <View style={styles.selectedAdditions}>
             {selectedSideDishes.map((sd, i) => {
               return i !== (selectedSideDishes.length - 1) ? (
-                <Text style={styles.selectedAddition}>{`${sd.name}, `}</Text>
+                <Text key={sd.id} style={styles.selectedAddition}>{`${sd.name}, `}</Text>
               ) : (
-                <Text style={styles.selectedAddition}>{sd.name}</Text>
+                <Text key={sd.id} style={styles.selectedAddition}>{sd.name}</Text>
               )
             })}
           </View>
@@ -110,6 +122,7 @@ const MealScreen = ({
         </View>
         <TouchableOpacity
           style={styles.addButton}
+          onPress={handleSetOrder}
         >
           <Text style={styles.addButtonText}>{$t('Food.addToCart')}</Text>
         </TouchableOpacity>
@@ -212,7 +225,8 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
     color: Colors.WHITE,
-    width: 15
+    width: 30,
+    textAlign: 'center'
   },
   orderLeft: {
     display: 'flex',

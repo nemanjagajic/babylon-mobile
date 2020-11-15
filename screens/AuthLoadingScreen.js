@@ -6,6 +6,7 @@ import { AuthContext } from '../providers/AuthProvider'
 import AuthStack from '../navigation/AuthStack'
 import Drawer from '../navigation/Drawer'
 import Colors from '../constants/Colors'
+import MealsProvider from '../providers/MealsProvider'
 
 const AuthLoadingScreen = () => {
   const [isLoadingUser, setIsLoadingUser] = useState(true)
@@ -35,7 +36,9 @@ const AuthLoadingScreen = () => {
   return (
     <NavigationContainer>
       {user ? (
-        <Drawer />
+        <MealsProvider>
+          <Drawer />
+        </MealsProvider>
       ) : (
         <AuthStack />
       )}

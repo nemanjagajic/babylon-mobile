@@ -18,6 +18,7 @@
     "optionalComment": "Optional comment",
     "chooseAdditions": "Choose additions",
     "addToCart": "Add to card",
-    "selectSideDishes": "Select side dishes"
+    "selectSideDishes": "Select side dishes",
+    "makeOrder": "Make an order"
   }
 }
