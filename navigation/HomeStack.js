@@ -60,8 +60,7 @@ const HomeStack = ({ navigation }) => (
       <Stack.Screen
         name={'SideDishesScreen'}
         component={SideDishesScreen}
-        options={({ route }) => {
-          return {
+        options={{
             title: $t('Food.selectSideDishes'),
             headerStyle: {
               backgroundColor: Colors.BACKGROUND,
@@ -73,13 +72,12 @@ const HomeStack = ({ navigation }) => (
             headerLeft: () => (
               <TouchableOpacity
                 style={{ marginLeft: 15 }}
-                onPress={() => navigation.navigate('MealScreen', { selectedSideDishes: route.params?.selectedSideDishes })}
+                onPress={() => navigation.goBack()}
               >
                 <Ionicons name={'md-arrow-back'} size={24} color={Colors.MAIN} />
               </TouchableOpacity>
             )
-          }
-        }}
+          }}
       />
     </Stack.Navigator>
   </View>
