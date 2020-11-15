@@ -17,6 +17,7 @@
     "title": "Food",
     "optionalComment": "Optional comment",
     "chooseAdditions": "Choose additions",
-    "addToCart": "Add to card"
+    "addToCart": "Add to card",
+    "selectSideDishes": "Select side dishes"
   }
 }

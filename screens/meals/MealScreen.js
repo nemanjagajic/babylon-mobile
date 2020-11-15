@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { View, Text, Image, StyleSheet, TextInput, Platform, TouchableOpacity, Keyboard } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import $t from '../../i18n'
+import MealsService from '../../services/api/MealsService'
 
-const MealScreen = ({ route: { params: { selectedFood: { picture, name, description, price } } } }) => {
+const MealScreen = ({
+  navigation,
+  route: { params: { selectedFood: { picture, name, description, price }, selectedSideDishes = [] } }
+}) => {
   const [ showDefault, setShowDefault ] = useState(false)
   const [ comment, setComment ] = useState('')
   const [ count, setCount ] = useState(1)
   const [ isKeyboardVisible, setIsKeyboardVisible ] = useState(false)
+
+  const { data: sideDishes } = useQuery('sideDishes', async () => {
+    const { data } = await MealsService.getSideDishes()
+    return data?.results
+  })
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -28,6 +38,13 @@ const MealScreen = ({ route: { params: { selectedFood: { picture, name, descript
     }
   })
 
+  const openSideDishes = () => {
+    navigation.navigate('SideDishesScreen', {
+      sideDishes,
+      selectedSideDishes
+    })
+  }
+
   return (
     <View style={styles.container}>
       {!isKeyboardVisible && (
@@ -44,10 +61,26 @@ const MealScreen = ({ route: { params: { selectedFood: { picture, name, descript
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.description}>{description}</Text>
       <Text style={styles.price}>{`${price * count} rsd`}</Text>
-      <View style={styles.additions}>
-        <Text style={styles.additionsText}>{$t('Food.chooseAdditions')}</Text>
-        <Ionicons name={'ios-arrow-forward'} size={20} color={Colors.WHITE} />
-      </View>
+      <TouchableOpacity
+        onPress={openSideDishes}
+        style={styles.additionsWrapper}
+      >
+        <View style={styles.additions}>
+          <Text style={styles.additionsText}>{$t('Food.chooseAdditions')}</Text>
+          <Ionicons name={'ios-arrow-forward'} size={20} color={Colors.WHITE} />
+        </View>
+        {selectedSideDishes?.length > 0 && (
+          <View style={styles.selectedAdditions}>
+            {selectedSideDishes.map((sd, i) => {
+              return i !== (selectedSideDishes.length - 1) ? (
+                <Text style={styles.selectedAddition}>{`${sd.name}, `}</Text>
+              ) : (
+                <Text style={styles.selectedAddition}>{sd.name}</Text>
+              )
+            })}
+          </View>
+        )}
+      </TouchableOpacity>
       <TextInput
         value={comment}
         onChangeText={text => setComment(text)}
@@ -124,7 +157,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
+  },
+  additionsWrapper: {
     marginTop: 20,
     marginLeft: 10,
     marginRight: 10,
@@ -198,6 +233,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: Colors.BLACK
+  },
+  selectedAdditions: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: 10,
+    flexWrap: 'wrap'
+  },
+  selectedAddition: {
+    color: Colors.GRAY
   }
 })
 
