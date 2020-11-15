@@ -28,7 +28,7 @@ export default () => {
           name={'HomeStack'}
           component={HomeStack}
           options={{
-            title: $t('Food.title'),
+            title: $t('Food.title')
           }}
         />
         <Drawer.Screen
