@@ -1,10 +1,9 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../screens/HomeScreen'
 import Colors from '../constants/Colors'
-import $t from '../i18n'
 import Logout from '../screens/auth/Logout'
 import HomeStack from './HomeStack'
+import $t from '../i18n'
 
 const Drawer = createDrawerNavigator();
 
@@ -28,6 +27,9 @@ export default () => {
         <Drawer.Screen
           name={'HomeStack'}
           component={HomeStack}
+          options={{
+            title: $t('Food.title'),
+          }}
         />
         <Drawer.Screen
           name={'Logout'}

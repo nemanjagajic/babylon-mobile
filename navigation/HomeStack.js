@@ -10,7 +10,7 @@ import SideDishesScreen from '../screens/meals/SideDishesScreen'
 
 const Stack = createStackNavigator();
 
-const HomeStack = ({ navigation, route }) => (
+const HomeStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
       name={'HomeScreen'}
