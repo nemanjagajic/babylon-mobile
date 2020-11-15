@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import Colors from '../../constants/Colors'
 
 const SideDishesScreen = ({ navigation, route: { params: { sideDishes, selectedSideDishes: initialSideDishes = [] } } }) => {
@@ -9,8 +9,7 @@ const SideDishesScreen = ({ navigation, route: { params: { sideDishes, selectedS
     const isSelected = selectedSideDishes.find(sd => sd.id === sideDish.id)
 
     return (
-      <TouchableOpacity
-        style={styles.item}
+      <TouchableWithoutFeedback
         onPress={() => {
           const updatedSideDishes = isSelected ?
             selectedSideDishes.filter(sd => sd.id !== sideDish.id)
@@ -20,9 +19,11 @@ const SideDishesScreen = ({ navigation, route: { params: { sideDishes, selectedS
         }}
         key={sideDish?.id}
       >
-        <View style={[styles.circle, { backgroundColor: isSelected ? Colors.MAIN : Colors.BLACK_100 }]} />
-        <Text style={styles.text}>{sideDish?.name}</Text>
-      </TouchableOpacity>
+        <View style={styles.item}>
+          <View style={[styles.circle, { backgroundColor: isSelected ? Colors.MAIN : Colors.BLACK_100 }]} />
+          <Text style={styles.text}>{sideDish?.name}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 
